@@ -1,0 +1,105 @@
+<main class="admin-form-page">
+  <nz-spin [nzSpinning]="isSpinning" [nzSize]="'large'" nzTip="Working...">
+    <div class="admin-form-card flex flex-col items-center">
+      <h1 class="admin-form-title text-xl font-bold mb-4 text-center">Cadastrar veículo</h1>
+
+      <form nz-form [formGroup]="postCarForm" (ngSubmit)="postCar()">
+        <div class="pb-6">
+          <div class="profile-badge">
+            <label for="upload_vehicle_images">Fotos do veículo</label>
+            <input type="file" id="upload_vehicle_images" (change)="onFileSelected($event)" accept="image/*" multiple />
+            <div class="image-previews" *ngIf="imagePreviews.length">
+              <img *ngFor="let image of imagePreviews" [src]="image" alt="Prévia da foto do veículo" />
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <nz-form-item>
+            <nz-form-control nzHasFeedback [nzXs]="24" nzErrorTip="This Input Is Required">
+              <nz-select formControlName="brand" nzShowSearch nzAllowClear nzPlaceHolder="Marca">
+                <nz-option *ngFor="let brand of listOfBrands" nzLabel="{{brand}}" nzValue="{{brand}}"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div>
+          <nz-form-item>
+            <nz-form-control nzHasFeedback [nzXs]="24" nzErrorTip="This Input Is Required">
+              <input nz-input placeholder="Modelo" formControlName="name" />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div>
+          <nz-form-item>
+            <nz-form-control [nzXs]="24">
+              <input nz-input placeholder="Proprietário (ex.: João, Bau ou Gilmar)" formControlName="ownerName" />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div>
+          <nz-form-item>
+            <nz-form-control nzHasFeedback [nzXs]="24" nzErrorTip="This Input Is Required">
+              <nz-select formControlName="type" nzShowSearch nzAllowClear nzPlaceHolder="Selecione tipo">
+                <nz-option *ngFor="let type of listOfType" nzLabel="{{type}}" nzValue="{{type}}"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div>
+          <nz-form-item>
+            <nz-form-control nzHasFeedback [nzXs]="24" nzErrorTip="This Input Is Required">
+              <nz-select formControlName="transmission" nzShowSearch nzAllowClear nzPlaceHolder="selecione a transmissão">
+                <nz-option *ngFor="let transmission of listOfTransmission" nzLabel="{{transmission}}"
+                  nzValue="{{transmission}}"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div>
+          <nz-form-item>
+            <nz-form-control nzHasFeedback [nzXs]="24" nzErrorTip="This Input Is Required">
+              <nz-select formControlName="color" nzShowSearch nzAllowClear nzPlaceHolder="Selecione a cor">
+                <nz-option *ngFor="let color of listOfColor" nzLabel="{{color}}" nzValue="{{color}}"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div>
+          <nz-form-item>
+            <nz-form-control nzHasFeedback [nzXs]="24" nzErrorTip="This Input Is Required">
+              <input formControlName="year" nz-input placeholder="Ano" />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div>
+          <nz-form-item>
+            <nz-form-control nzHasFeedback [nzXs]="24" nzErrorTip="This Input Is Required">
+              <input formControlName="price" nz-input placeholder="Preço" />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div>
+          <nz-form-item>
+            <nz-form-control nzHasFeedback [nzXs]="24" nzErrorTip="This Input Is Required">
+              <textarea formControlName="description" rows="1" nz-input placeholder="Descrição"></textarea>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <button type="submit" nz-button class="login-form-button login-form-margin" [nzType]="'primary'"
+          [disabled]="postCarForm.invalid || !selectedFiles.length || isSpinning">
+          Registrar Carro
+        </button>
+      </form>
+    </div>
+  </nz-spin>
+</main>

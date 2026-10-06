@@ -1,0 +1,50 @@
+<main class="details-page" *ngIf="car">
+  <a class="back-link" routerLink="/customer/dashboard">← Voltar para veículos</a>
+
+  <section class="details-layout">
+    <div class="gallery-panel">
+      <div class="details-image-wrap">
+        <img class="details-image" [src]="galleryImages[activeImageIndex]" [alt]="car.brand + ' ' + car.name">
+        <span class="image-counter">{{ activeImageIndex + 1 }} / {{ galleryImages.length }}</span>
+        <button *ngIf="galleryImages.length > 1" class="gallery-arrow gallery-arrow--previous" type="button"
+          aria-label="Imagem anterior" (click)="previousImage()">‹</button>
+        <button *ngIf="galleryImages.length > 1" class="gallery-arrow gallery-arrow--next" type="button"
+          aria-label="Próxima imagem" (click)="nextImage()">›</button>
+      </div>
+      <div *ngIf="galleryImages.length > 1" class="thumbnail-list">
+        <button *ngFor="let image of galleryImages; let index = index" type="button"
+          [class.thumbnail--active]="index === activeImageIndex" (click)="selectImage(index)">
+          <img [src]="image" [alt]="'Imagem ' + (index + 1) + ' de ' + car.name">
+        </button>
+      </div>
+    </div>
+
+    <aside class="details-card">
+      <span class="eyebrow">VEÍCULO SELECIONADO</span>
+      <span class="details-type">{{ car.type }}</span>
+      <h1>{{car.brand}} <strong>{{car.name}}</strong></h1>
+      <div class="details-price">R$ {{ formatPrice(car.price) }}</div>
+      <p class="details-description">{{car.description || 'Um veículo pronto para acompanhar os seus próximos caminhos.'}}</p>
+
+      <div class="details-specs">
+        <span><small>Ano</small><b>{{car.year || '—'}}</b></span>
+        <span><small>Cor</small><b>{{car.color || '—'}}</b></span>
+        <span><small>Transmissão</small><b>{{car.transmission || '—'}}</b></span>
+        <span><small>Disponibilidade</small><b>{{car.status || 'Ativo'}}</b></span>
+      </div>
+
+      <a class="details-book-button" [href]="whatsappUrl" target="_blank" rel="noopener">
+        Tenho interesse pelo WhatsApp
+      </a>
+      <p class="details-note">Tire suas dúvidas diretamente com a nossa equipe, sem precisar criar uma conta.</p>
+    </aside>
+  </section>
+
+  <section class="details-information">
+    <div>
+      <span class="eyebrow">SOBRE O CARRO</span>
+      <h2>Detalhes que ajudam na sua decisão.</h2>
+    </div>
+    <p>{{car.description || 'Fale com a Êxito Multimarcas para conhecer este veículo, conferir as condições e agendar uma visita.'}}</p>
+  </section>
+</main>

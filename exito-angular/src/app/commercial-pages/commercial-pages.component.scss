@@ -1,0 +1,21 @@
+.commercial-page { min-height: calc(100vh - 64px); padding: 52px 5vw 72px; background: var(--page-bg); }
+.commercial-heading, .commercial-layout, .commercial-form--wide { max-width: 1040px; margin-right: auto; margin-left: auto; }
+.commercial-heading { margin-bottom: 28px; }
+.eyebrow { color: #69afea; font-size: 11px; font-weight: 800; letter-spacing: 1.5px; }
+.commercial-heading h1 { margin: 9px 0; color: var(--text); font-size: clamp(30px, 4vw, 44px); line-height: 1.08; }
+.commercial-heading p { color: var(--muted); }
+.commercial-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, .75fr); gap: 24px; align-items: start; }
+.commercial-form { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 26px; border: 1px solid var(--border); border-radius: 6px; background: var(--surface); }
+.commercial-form label { display: grid; gap: 7px; color: var(--muted); font-size: 12px; font-weight: 700; }
+.commercial-form input, .commercial-form select, .commercial-form textarea { width: 100%; min-height: 44px; padding: 10px 12px; border: 1px solid var(--border); border-radius: 4px; background: #101820; color: var(--text); font: inherit; }
+.commercial-form textarea { resize: vertical; }
+.commercial-form button { min-height: 46px; padding: 10px 16px; border: 0; border-radius: 4px; background: #168a68; color: #fff; cursor: pointer; font-weight: 800; }
+.commercial-form button:hover { background: #20a57e; }
+.commercial-form button:disabled { cursor: not-allowed; opacity: .5; }
+.estimate-panel { display: grid; gap: 12px; padding: 28px; border-top: 3px solid #d48a2a; background: #19232c; }
+.estimate-panel strong { color: #f0bd69; font-size: 34px; }
+.estimate-panel p { color: #a7b3bc; font-size: 13px; line-height: 1.7; }
+.commercial-form--wide { grid-template-columns: 1fr 1fr; }
+.field-wide { grid-column: 1 / -1; }
+@media (max-width: 700px) { .commercial-page { padding: 34px 16px 52px; } .commercial-layout { grid-template-columns: 1fr; } .commercial-form { padding: 20px; } }
+@media (max-width: 480px) { .commercial-form, .commercial-form--wide { grid-template-columns: 1fr; } .field-wide { grid-column: auto; } }

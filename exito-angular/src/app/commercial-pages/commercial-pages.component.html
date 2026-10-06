@@ -1,0 +1,63 @@
+<main class="commercial-page">
+  <header class="commercial-heading" [ngSwitch]="page">
+    <ng-container *ngSwitchCase="'financiamento'">
+      <span class="eyebrow">ÊXITO MULTIMARCAS · CRÉDITO</span>
+      <h1>Simule seu financiamento</h1>
+      <p>Faça uma estimativa e converse com a equipe sobre as condições disponíveis.</p>
+    </ng-container>
+    <ng-container *ngSwitchCase="'venda-seu-carro'">
+      <span class="eyebrow">ÊXITO MULTIMARCAS · AVALIAÇÃO</span>
+      <h1>Venda seu carro</h1>
+      <p>Envie os dados do veículo para iniciar uma avaliação com a nossa equipe.</p>
+    </ng-container>
+    <ng-container *ngSwitchDefault>
+      <span class="eyebrow">ÊXITO MULTIMARCAS · ATENDIMENTO</span>
+      <h1>Fale com a Êxito</h1>
+      <p>Envie sua mensagem e continue o atendimento pelo WhatsApp.</p>
+    </ng-container>
+  </header>
+
+  <section *ngIf="page === 'financiamento'" class="commercial-layout">
+    <form class="commercial-form" (ngSubmit)="sendFinancingRequest()">
+      <label>Valor do veículo
+        <input type="number" min="0" step="1000" name="vehicleValue" [(ngModel)]="vehicleValue" required>
+      </label>
+      <label>Valor de entrada
+        <input type="number" min="0" step="1000" name="downPayment" [(ngModel)]="downPayment" required>
+      </label>
+      <label>Prazo
+        <select name="months" [(ngModel)]="months">
+          <option [ngValue]="24">24 meses</option>
+          <option [ngValue]="36">36 meses</option>
+          <option [ngValue]="48">48 meses</option>
+          <option [ngValue]="60">60 meses</option>
+        </select>
+      </label>
+      <button type="submit">Consultar condições no WhatsApp</button>
+    </form>
+    <aside class="estimate-panel">
+      <span class="eyebrow">ESTIMATIVA MENSAL</span>
+      <strong>{{ formatCurrency(estimatedPayment) }}</strong>
+      <p>Simulação indicativa, calculada com taxa estimada de 1,8% ao mês. A proposta final depende de análise de crédito e das condições da financeira.</p>
+    </aside>
+  </section>
+
+  <form *ngIf="page === 'venda-seu-carro'" class="commercial-form commercial-form--wide" (ngSubmit)="sendVehicleEvaluation()">
+    <label>Marca<input name="brand" [(ngModel)]="tradeIn.brand" required></label>
+    <label>Modelo<input name="model" [(ngModel)]="tradeIn.model" required></label>
+    <label>Ano<input name="year" type="number" min="1950" [max]="2035" [(ngModel)]="tradeIn.year"></label>
+    <label>Quilometragem<input name="mileage" type="number" min="0" [(ngModel)]="tradeIn.mileage"></label>
+    <label>Seu nome<input name="name" [(ngModel)]="tradeIn.name"></label>
+    <label>WhatsApp<input name="phone" type="tel" [(ngModel)]="tradeIn.phone"></label>
+    <label class="field-wide">Observações<textarea name="notes" rows="4" [(ngModel)]="tradeIn.notes"></textarea></label>
+    <button class="field-wide" type="submit" [disabled]="!tradeIn.brand.trim() || !tradeIn.model.trim()">Solicitar avaliação pelo WhatsApp</button>
+  </form>
+
+  <form *ngIf="page === 'contato'" class="commercial-form commercial-form--wide" (ngSubmit)="sendContactMessage()">
+    <label>Nome<input name="name" [(ngModel)]="contact.name"></label>
+    <label>WhatsApp<input name="phone" type="tel" [(ngModel)]="contact.phone"></label>
+    <label>E-mail<input name="email" type="email" [(ngModel)]="contact.email"></label>
+    <label class="field-wide">Mensagem<textarea name="message" rows="5" [(ngModel)]="contact.message" required></textarea></label>
+    <button class="field-wide" type="submit" [disabled]="!contact.message.trim()">Enviar mensagem pelo WhatsApp</button>
+  </form>
+</main>

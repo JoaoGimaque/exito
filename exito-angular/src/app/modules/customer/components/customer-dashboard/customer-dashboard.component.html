@@ -1,0 +1,60 @@
+<main class="customer-page">
+  <header class="customer-heading">
+      <span class="eyebrow">ÊXITO MULTIMARCAS · ESTOQUE</span>
+      <h1>Encontre seu próximo carro</h1>
+      <p>{{ cars.length }} veículos disponíveis. Escolha o seu e fale direto com a nossa equipe.</p>
+  </header>
+
+    <section class="catalog-filters" aria-label="Filtros de veículos">
+      <label class="search-field">
+        <span>Buscar veículo</span>
+        <input type="search" [(ngModel)]="searchTerm" placeholder="Marca, modelo ou ano">
+      </label>
+      <label>
+        <span>Marca</span>
+        <select [(ngModel)]="selectedBrand">
+          <option value="">Todas as marcas</option>
+          <option *ngFor="let brand of brands" [value]="brand">{{ brand }}</option>
+        </select>
+      </label>
+      <label>
+        <span>Categoria</span>
+        <select [(ngModel)]="selectedType">
+          <option value="">Todas as categorias</option>
+          <option *ngFor="let type of types" [value]="type">{{ type }}</option>
+        </select>
+      </label>
+    </section>
+
+  <nz-spin [nzSpinning]="isSpinning">
+    <div class="vehicle-grid" *ngIf="filteredCars.length; else emptyCatalog">
+      <article class="vehicle-card" *ngFor="let car of filteredCars">
+        <a class="vehicle-image-wrap" [routerLink]="['/customer/book', car.id]" [attr.aria-label]="'Ver detalhes do ' + car.brand + ' ' + car.name">
+          <img class="vehicle-image" [src]="car.processedImage" [alt]="car.brand + ' ' + car.name" loading="lazy">
+          <span *ngIf="car.galleryImages.length > 1" class="photo-count">{{ car.galleryImages.length }} fotos</span>
+        </a>
+
+      <div class="vehicle-content">
+        <span class="vehicle-type">{{ car.type }}</span>
+        <h2>{{car.brand}} - {{car.name}}</h2>
+
+        <p class="vehicle-description">{{car.description}}</p>
+
+        <div class="vehicle-specs">
+          <span>{{ car.year }}</span>
+          <span>{{ car.transmission }}</span>
+          <span>{{ car.color }}</span>
+        </div>
+
+        <div class="vehicle-footer">
+          <strong>R$ {{ formatPrice(car.price) }}</strong>
+          <a class="details-link" [routerLink]="['/customer/book', car.id]">Ver detalhes</a>
+        </div>
+      </div>
+    </article>
+  </div>
+  </nz-spin>
+  <ng-template #emptyCatalog>
+    <div class="catalog-empty">{{ errorMessage || (cars.length ? 'Nenhum veículo corresponde a esses filtros.' : 'Nenhum veículo disponível no momento.') }}</div>
+  </ng-template>
+</main>

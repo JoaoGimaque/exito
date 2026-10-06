@@ -1,0 +1,70 @@
+<main class="home-page">
+  <section class="home-hero">
+    <div class="home-hero__content">
+      <span class="section-tag">Êxito Multimarcas</span>
+      <h1>Seu próximo<br>carro <em>está aqui.</em></h1>
+      <p>Veículos selecionados, procedência e atendimento transparente para você comprar com tranquilidade.</p>
+      <div class="hero-actions">
+        <button class="primary-button" type="button" (click)="openCatalog()">Ver veículos</button>
+        <a class="secondary-button" [href]="whatsappUrl" target="_blank" rel="noopener">Falar no WhatsApp</a>
+      </div>
+      <div class="hero-stats">
+        <div><strong>{{ cars.length || '—' }}</strong><span>Veículos</span></div>
+        <div><strong>100%</strong><span>Transparência</span></div>
+        <div><strong>4.9</strong><span>Avaliação</span></div>
+      </div>
+    </div>
+    <div class="home-hero__visual" aria-hidden="true">
+      <div class="hero-glow"></div>
+      <div class="hero-wheel hero-wheel--one"></div>
+      <div class="hero-wheel hero-wheel--two"></div>
+      <span>ÊXITO</span>
+    </div>
+  </section>
+
+  <a class="whatsapp-button" [href]="whatsappUrl" target="_blank" rel="noopener" aria-label="Falar com a Êxito Multimarcas pelo WhatsApp">
+    <span>◔</span> Falar com a Êxito
+  </a>
+
+  <section id="estoque" class="catalog-preview">
+    <div class="section-heading">
+      <div>
+        <span class="section-tag">Estoque selecionado</span>
+        <h2>Escolha o seu próximo <em>veículo</em></h2>
+      </div>
+      <button class="text-button" type="button" (click)="openCatalog()">Ver estoque completo <span>→</span></button>
+    </div>
+
+    <div *ngIf="isSpinning" class="catalog-state">Carregando veículos...</div>
+    <div *ngIf="!isSpinning && !featuredCars.length" class="catalog-state">Nenhum veículo disponível no momento.</div>
+    <div *ngIf="featuredCars.length" class="home-car-grid">
+      <article class="home-car-card" *ngFor="let car of featuredCars">
+        <div class="home-car-card__image">
+          <img [src]="car.processedImage" [alt]="car.brand + ' ' + car.name" loading="lazy">
+          <span>{{ car.year }}</span>
+        </div>
+        <div class="home-car-card__body">
+          <small>{{ car.brand }}</small>
+          <h3>{{ car.name }}</h3>
+          <p>{{ car.type }} · {{ car.transmission }}</p>
+          <div class="home-car-card__footer">
+            <strong>R$ {{ formatPrice(car.price) }}</strong>
+            <button type="button" (click)="openCatalog()">Detalhes</button>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="trust-section">
+    <div class="section-heading section-heading--center">
+      <span class="section-tag">Por que escolher a Êxito</span>
+      <h2>Compra segura, <em>sem complicação.</em></h2>
+    </div>
+    <div class="trust-grid">
+      <article><span class="trust-icon">01</span><h3>Procedência</h3><p>Veículos selecionados para você comprar com confiança.</p></article>
+      <article><span class="trust-icon">02</span><h3>Atendimento</h3><p>Orientação clara em todas as etapas da sua compra.</p></article>
+      <article><span class="trust-icon">03</span><h3>Seu melhor negócio</h3><p>Condições competitivas para você sair de carro novo.</p></article>
+    </div>
+  </section>
+</main>

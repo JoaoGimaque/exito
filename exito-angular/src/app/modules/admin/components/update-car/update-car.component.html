@@ -1,0 +1,109 @@
+<main class="admin-form-page">
+  <nz-spin [nzSpinning]="isSpinning" [nzSize]="'large'" nzTip="Carregando...">
+    <div class="admin-form-card flex flex-col items-center">
+      <h1 class="admin-form-title text-xl font-bold mb-4 text-center">Editar veículo</h1>
+
+      <form nz-form [formGroup]="updateForm" (ngSubmit)="updateCar()">
+        <div class="pb-6">
+          <div class="file-upload-container">
+            <label>
+              <span>Selecione as fotos do veículo</span>
+
+              <input type="file" nz-button nzType="primary" (change)="onFileSelected($event)" accept="image/*" multiple />
+            </label>
+
+            <div class="image-previews" *ngIf="existingImages.length">
+              <img *ngFor="let image of existingImages" [src]="image" alt="Foto atual do veículo" />
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <nz-form-item>
+            <nz-form-control nzHasFeedback [nzXs]="24" nzErrorTip="Este campo é obrigatório">
+              <nz-select formControlName="brand" nzShowSearch nzAllowClear nzPlaceHolder="Selecione a marca">
+                <nz-option *ngFor="let brand of listOfBrands" nzLabel="{{brand}}" nzValue="{{brand}}"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div>
+          <nz-form-item>
+            <nz-form-control nzHasFeedback [nzXs]="24" nzErrorTip="Este campo é obrigatório">
+              <input nz-input placeholder="Nome" formControlName="name" />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div>
+          <nz-form-item>
+            <nz-form-control [nzXs]="24">
+              <input nz-input placeholder="Proprietário (ex.: João, Bau ou Gilmar)" formControlName="ownerName" />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div>
+          <nz-form-item>
+            <nz-form-control nzHasFeedback [nzXs]="24" nzErrorTip="Este campo é obrigatório">
+              <nz-select formControlName="type" nzShowSearch nzAllowClear nzPlaceHolder="Selecione o tipo">
+                <nz-option *ngFor="let type of listOfType" nzLabel="{{type}}" nzValue="{{type}}"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div>
+          <nz-form-item>
+            <nz-form-control nzHasFeedback [nzXs]="24" nzErrorTip="Este campo é obrigatório">
+              <nz-select formControlName="transmission" nzShowSearch nzAllowClear nzPlaceHolder="Selecione a transmissão">
+                <nz-option *ngFor="let transmission of listOfTransmission" nzLabel="{{transmission}}"
+                  nzValue="{{transmission}}"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div>
+          <nz-form-item>
+            <nz-form-control nzHasFeedback [nzXs]="24" nzErrorTip="Este campo é obrigatório">
+              <nz-select formControlName="color" nzShowSearch nzAllowClear nzPlaceHolder="Selecione a cor">
+                <nz-option *ngFor="let color of listOfColor" nzLabel="{{color}}" nzValue="{{color}}"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div>
+          <nz-form-item>
+            <nz-form-control nzHasFeedback [nzXs]="24" nzErrorTip="Este campo é obrigatório">
+              <input formControlName="year" nz-input placeholder="Ano do modelo" />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div>
+          <nz-form-item>
+            <nz-form-control nzHasFeedback [nzXs]="24" nzErrorTip="Este campo é obrigatório">
+              <input formControlName="price" nz-input placeholder="Preço" />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div>
+          <nz-form-item>
+            <nz-form-control nzHasFeedback [nzXs]="24" nzErrorTip="Este campo é obrigatório">
+              <textarea formControlName="description" rows="1" nz-input placeholder="Descrição"></textarea>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <button type="submit" nz-button class="login-form-button login-form-margin" [nzType]="'primary'"
+          [disabled]="updateForm.invalid || isSpinning">
+          Atualizar
+        </button>
+      </form>
+    </div>
+  </nz-spin>
+</main>

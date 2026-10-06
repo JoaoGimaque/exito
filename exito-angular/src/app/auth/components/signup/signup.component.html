@@ -1,0 +1,86 @@
+<div class="auth-page min-h-screen py-6 flex flex-col justify-center sm:py-12">
+  <div class="relative py-3 sm:max-w-xl sm:mx-auto">
+    <div
+      class="auth-accent absolute inset-0 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl">
+    </div>
+  </div>
+
+  <div class="auth-card relative px-4 py-10 shadow-lg sm:rounded-3xl sm:p-20">
+    <div class="max-w-md mx-auto">
+      <div>
+        <h1 class="auth-title text-center text-2xl font-bold">
+          Seu próximo carro começa aqui 🚗
+        </h1>
+      </div>
+
+      <form [formGroup]="signupForm" (ngSubmit)="register()">
+        <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
+
+          <!-- email field -->
+          <div class="relative">
+            <input id="email" type="email"
+              class="auth-input peer placeholder-transparent h-10 w-full border-b-2 text-gray-900 focus:outline-none"
+              placeholder="Email" formControlName="email" />
+
+            <label for="email"
+              class="auth-label absolute left-0 -top-3.5 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-sm">
+              Email
+            </label>
+          </div>
+
+          <!-- password field -->
+          <div class="relative">
+            <input id="password" type="password"
+              class="auth-input peer placeholder-transparent h-10 w-full border-b-2 text-gray-900 focus:outline-none"
+              placeholder="Senha" formControlName="password" />
+
+            <label for="password"
+              class="auth-label absolute left-0 -top-3.5 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-sm">
+              Crie sua senha
+            </label>
+          </div>
+
+          <!-- confirm password field -->
+          <div class="relative">
+            <input id="confirm-password" type="password"
+              class="auth-input peer placeholder-transparent h-10 w-full border-b-2 text-gray-900 focus:outline-none"
+              placeholder="Confirmar senha" formControlName="checkPassword" />
+
+            <label for="confirm-password"
+              class="auth-label absolute left-0 -top-3.5 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-sm">
+              Confirmar senha
+            </label>
+          </div>
+
+          <!-- name field -->
+          <div class="relative">
+            <input id="name" type="text"
+              class="auth-input peer placeholder-transparent h-10 w-full border-b-2 text-gray-900 focus:outline-none"
+              placeholder="Nome completo" formControlName="name" />
+
+            <label for="name"
+              class="auth-label absolute left-0 -top-3.5 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-sm">
+              Nome completo
+            </label>
+          </div>
+
+          <!-- Button -->
+          <div class="relative">
+            <button class="auth-button btn btn-primary text-white w-full h-10 mt-4" type="submit"
+              [disabled]="signupForm.invalid">
+              Cadastrar
+            </button>
+          </div>
+
+          <div>
+            <p class="auth-note text-center mt-4">
+              Já possui uma conta?
+              <a routerLink="/login" class="auth-link font-bold cursor-pointer">Entrar</a>
+            </p>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

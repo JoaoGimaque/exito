@@ -1,0 +1,9 @@
+.admin-form-page { min-height: calc(100vh - 64px); padding: 40px 20px 64px; background: var(--page-bg); }
+.admin-form-card { width: min(100%, 680px); margin: 0 auto; padding: 30px; border: 1px solid var(--border); border-radius: 9px; background: var(--surface); }
+.admin-form-title { color: var(--text); }
+.admin-form-card form { width: 100%; }
+.admin-form-card nz-form-item { margin-bottom: 16px; }
+.admin-form-card button[nz-button] { width: 100%; height: 42px; border-radius: 5px; font-weight: 700; }
+.image-previews { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 8px; margin-top: 12px; }
+.image-previews img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border: 1px solid var(--border); border-radius: 4px; }
+@media (max-width: 560px) { .admin-form-page { padding: 24px 16px 48px; } .admin-form-card { padding: 22px 16px; } }

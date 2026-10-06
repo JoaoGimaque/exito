@@ -1,0 +1,64 @@
+.custom-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  min-height: 64px;
+  background: #111923;
+  border-bottom: 1px solid #263545;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 0 5vw;
+
+  .navbar-title {
+    > a {
+      color: white !important;
+      color: #f2f5f7 !important;
+      font-size: 17px;
+      font-weight: 800;
+      text-decoration: none;
+      letter-spacing: .2px;
+
+      span { color: #62b2ef; font-size: 10px; letter-spacing: 2px; }
+    }
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+
+    a {
+      position: relative;
+      padding: 22px 0;
+      margin-left: 24px;
+      color: #aebbc7;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+
+      &:hover,
+      &.active { color: #fff; }
+
+      &.active::after {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        height: 2px;
+        background: var(--primary);
+        content: '';
+      }
+    }
+
+    .nav-login { padding: 10px 16px; border: 1px solid #2f79b5; border-radius: 4px; color: #cce9ff; }
+    .nav-login:hover { background: #2784d9; color: #fff; }
+    .nav-whatsapp { color: #65d6b4; }
+  }
+}
+
+@media (max-width: 680px) {
+  .custom-navbar { align-items: flex-start; flex-direction: column; padding: 16px 20px 0; }
+  .custom-navbar .nav-links { width: 100%; overflow-x: auto; }
+  .custom-navbar .nav-links a { padding: 12px 0 15px; margin: 0 22px 0 0; white-space: nowrap; }
+}

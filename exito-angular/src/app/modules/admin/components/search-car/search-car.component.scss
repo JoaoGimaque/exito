@@ -1,0 +1,9 @@
+.search-page { min-height: calc(100vh - 64px); padding: 40px 20px 64px; background: var(--page-bg); }
+.search-card { width: min(100%, 680px); margin: 0 auto 28px; padding: 30px; border: 1px solid var(--border); border-radius: 9px; background: var(--surface); }
+.search-title { color: var(--text); }
+.search-card form { width: 100%; }
+.search-card nz-form-item { margin-bottom: 16px; }
+.search-card button[nz-button] { width: 100%; height: 42px; border-radius: 5px; font-weight: 700; }
+.search-page > div:last-child { max-width: 1240px; margin: 0 auto; padding: 28px !important; background: var(--surface) !important; border: 1px solid var(--border); border-radius: 9px; }
+.search-page > div:last-child h1 { color: var(--text) !important; }
+@media (max-width: 560px) { .search-page { padding: 24px 16px 48px; } .search-card { padding: 22px 16px; } }

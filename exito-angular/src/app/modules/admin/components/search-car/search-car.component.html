@@ -1,0 +1,73 @@
+<main class="search-page">
+  <nz-spin [nzSpinning]="isSpinning" [nzSize]="'large'" nzTip="Carregando...">
+    <div class="search-card flex flex-col items-center">
+      <h1 class="search-title text-xl font-bold mb-4 text-center">Buscar veículos</h1>
+
+      <form nz-form [formGroup]="searchCarForm">
+        <div>
+          <nz-form-item>
+            <nz-form-control nzHasFeedback [nzXs]="24" nzErrorTip="Este campo é obrigatório">
+              <nz-select formControlName="brand" nzShowSearch nzAllowClear nzPlaceHolder="Selecione a marca">
+                <nz-option *ngFor="let brand of listOfBrands" nzLabel="{{brand}}" nzValue="{{brand}}"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div>
+          <nz-form-item>
+            <nz-form-control nzHasFeedback [nzXs]="24" nzErrorTip="Este campo é obrigatório">
+              <nz-select formControlName="type" nzShowSearch nzAllowClear nzPlaceHolder="Selecione o tipo">
+                <nz-option *ngFor="let type of listOfType" nzLabel="{{type}}" nzValue="{{type}}"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div>
+          <nz-form-item>
+            <nz-form-control nzHasFeedback [nzXs]="24" nzErrorTip="Este campo é obrigatório">
+              <nz-select formControlName="transmission" nzShowSearch nzAllowClear nzPlaceHolder="Selecione a transmissão">
+                <nz-option *ngFor="let transmission of listOfTransmission" nzLabel="{{transmission}}"
+                  nzValue="{{transmission}}"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div>
+          <nz-form-item>
+            <nz-form-control nzHasFeedback [nzXs]="24" nzErrorTip="Este campo é obrigatório">
+              <nz-select formControlName="color" nzShowSearch nzAllowClear nzPlaceHolder="Selecione a cor">
+                <nz-option *ngFor="let color of listOfColor" nzLabel="{{color}}" nzValue="{{color}}"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <button nz-button class="login-form-button login-form-margin w-full" [nzType]="'primary'" (click)="searchCar()">
+          Buscar
+        </button>
+      </form>
+    </div>
+  </nz-spin>
+
+<div class="container mx-auto px-4 bg-gray-100 py-8" *ngIf="cars.length > 0">
+  <h1 class="text-xl font-bold text-gray-800 mb-4 text-center">Lista de Carros</h1>
+
+  <div class="flex flex-wrap">
+    <div class="w-1/4 p-4" *ngFor="let car of cars">
+      <div class="bg-white shadow-lg rounded-lg p-4">
+        <img [src]="car.processedImage" alt="carro" class="w-full h-32 object-cover object-center">
+
+        <div class="mt-4">
+          <h2 class="text-gray-900 title-font text-lg font-medium">{{car.name}}</h2>
+          <p class="text-gray-500">{{car.brand}}</p>
+          <p class="text-gray-500">{{car.type}}</p>
+          <p class="text-gray-500">{{car.transmission}}</p>
+          <p class="text-gray-500">{{car.color}}</p>
+          <p class="text-gray-500">{{car.price}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
