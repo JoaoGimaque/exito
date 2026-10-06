@@ -1,6 +1,5 @@
 {
-  "installCommand": "cd exito-angular && npm ci",
-  "buildCommand": "cd exito-angular && npm run build",
+  "buildCommand": "npm run build",
   "outputDirectory": "exito-angular/dist/exito-angular/browser",
   "rewrites": [
     {
