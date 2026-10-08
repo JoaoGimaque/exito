@@ -122,15 +122,6 @@ cd exito-spring
 .\mvnw.cmd test
 ```
 
-## Publicar o backend no Railway
-
-1. Crie um projeto no Railway e adicione um serviço MySQL.
-2. Crie outro serviço ligado a este repositório e configure o **Root Directory** como `/exito-spring`. O `Dockerfile` e o `railway.json` nessa pasta fazem o build com Java 21 e iniciam a API na porta fornecida pelo Railway.
-3. No serviço da API, adicione `MYSQLHOST`, `MYSQLPORT`, `MYSQLDATABASE`, `MYSQLUSER` e `MYSQLPASSWORD` usando as variáveis do serviço MySQL. Também defina `JWT_KEY` com uma chave aleatória codificada em Base64 (32 bytes ou mais).
-4. Gere um domínio público para a API. O Railway verifica a disponibilidade pelo endpoint `/health`, que também testa a conexão com o banco.
-
-Depois do deploy, atualize a URL base da API nos serviços Angular para o domínio HTTPS do Railway. Os valores `localhost:8080` são somente para desenvolvimento local; publicar o backend não altera automaticamente a configuração já publicada no Vercel.
-
 ## API
 
 | Método | Endpoint | Acesso |
