@@ -26,7 +26,6 @@ export class UpdateCarComponent {
   existingImages: string[] = []
   updateForm!: FormGroup // ! is used to tell TypeScript that this variable will be initialized later
   listOfOption: Array<{ label: string; value: string }> = []
-  listOfBrands = ['Toyota', 'Honda', 'BMW', 'Mercedes', 'Audi', 'Lexus']
   listOfType = ['Sports Car', 'Diesel', 'Crossover', 'Luxury Car']
   listOfColor = ['Red', 'Blue', 'Brown', 'Green']
   listOfTransmission = ['Manual', 'Automatic']

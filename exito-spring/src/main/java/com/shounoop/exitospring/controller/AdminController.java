@@ -1,6 +1,5 @@
 package com.shounoop.exitospring.controller;
 
-import com.shounoop.exitospring.dto.BookACarDto;
 import com.shounoop.exitospring.dto.CarDto;
 import com.shounoop.exitospring.dto.SearchCarDto;
 import com.shounoop.exitospring.services.admin.AdminService;
@@ -10,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/admin")
@@ -58,22 +56,6 @@ public class AdminController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
-    }
-
-    @GetMapping("/car/bookings")
-    private ResponseEntity<List<BookACarDto>> getBookings() {
-        return ResponseEntity.ok(adminService.getBookings());
-    }
-
-    @GetMapping("/car/booking/{bookingId}/{status}")
-    private ResponseEntity<Void> changeBookingStatus(@PathVariable Long bookingId, @PathVariable String status) {
-        boolean isSuccessful = adminService.changeBookingStatus(bookingId, status);
-
-        if (isSuccessful) {
-            return ResponseEntity.status(HttpStatus.OK).build();
-        }
-
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
     @PostMapping("/car/search")

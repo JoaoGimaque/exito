@@ -21,9 +21,7 @@
         <div>
           <nz-form-item>
             <nz-form-control nzHasFeedback [nzXs]="24" nzErrorTip="Este campo é obrigatório">
-              <nz-select formControlName="brand" nzShowSearch nzAllowClear nzPlaceHolder="Selecione a marca">
-                <nz-option *ngFor="let brand of listOfBrands" nzLabel="{{brand}}" nzValue="{{brand}}"></nz-option>
-              </nz-select>
+              <input nz-input placeholder="Marca do veículo" formControlName="brand" />
             </nz-form-control>
           </nz-form-item>
         </div>

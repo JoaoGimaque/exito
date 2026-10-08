@@ -34,7 +34,6 @@ A Êxito Multimarcas é uma aplicação web composta por uma interface Angular e
 - Simular uma parcela estimada e enviar o pedido de condições pelo WhatsApp.
 - Solicitar avaliação para vender um veículo e enviar mensagens de contato.
 - Administrar o estoque: cadastrar, editar e excluir veículos, anexar várias fotos e registrar o proprietário.
-- Consultar reservas antigas no painel administrativo.
 
 > O nome do proprietário é informação interna: aparece no painel e nas respostas administrativas, mas não no catálogo público nem nos detalhes acessíveis a visitantes.
 
@@ -44,7 +43,7 @@ A Êxito Multimarcas é uma aplicação web composta por uma interface Angular e
 | --- | --- |
 | Início | `/` |
 | Estoque público | `/estoque` |
-| Detalhe do veículo | `/customer/book/:id` |
+| Detalhe do veículo | `/customer/car/:id` |
 | Simulação de financiamento | `/financiamento` |
 | Avaliação de veículo | `/venda-seu-carro` |
 | Contato | `/contato` |
@@ -74,6 +73,8 @@ A Êxito Multimarcas é uma aplicação web composta por uma interface Angular e
 2. Configure a conexão, o usuário e a senha do banco no arquivo `exito-spring/src/main/resources/application.properties`. A aplicação usa `spring.jpa.hibernate.ddl-auto=update` para atualizar as tabelas conforme as entidades.
 
 3. Configure uma chave JWT própria e segura para o ambiente. Não publique senhas, tokens ou chaves secretas em commits ou documentação.
+
+Para desenvolvimento local, a aplicação usa os valores padrão de `localhost:3306/exito`. Configure sua senha local do MySQL em `SPRING_DATASOURCE_PASSWORD` antes de iniciar a API. A conexão e a chave JWT podem ser substituídas pelas variáveis `SPRING_DATASOURCE_URL`, `SPRING_DATASOURCE_USERNAME`, `SPRING_DATASOURCE_PASSWORD` e `JWT_KEY`.
 
 4. Instale as dependências do frontend:
 
@@ -121,6 +122,15 @@ cd exito-spring
 .\mvnw.cmd test
 ```
 
+## Publicar o backend no Railway
+
+1. Crie um projeto no Railway e adicione um serviço MySQL.
+2. Crie outro serviço ligado a este repositório e configure o **Root Directory** como `/exito-spring`. O `Dockerfile` e o `railway.json` nessa pasta fazem o build com Java 21 e iniciam a API na porta fornecida pelo Railway.
+3. No serviço da API, adicione `MYSQLHOST`, `MYSQLPORT`, `MYSQLDATABASE`, `MYSQLUSER` e `MYSQLPASSWORD` usando as variáveis do serviço MySQL. Também defina `JWT_KEY` com uma chave aleatória codificada em Base64 (32 bytes ou mais).
+4. Gere um domínio público para a API. O Railway verifica a disponibilidade pelo endpoint `/health`, que também testa a conexão com o banco.
+
+Depois do deploy, atualize a URL base da API nos serviços Angular para o domínio HTTPS do Railway. Os valores `localhost:8080` são somente para desenvolvimento local; publicar o backend não altera automaticamente a configuração já publicada no Vercel.
+
 ## API
 
 | Método | Endpoint | Acesso |
@@ -135,10 +145,6 @@ cd exito-spring
 | `PUT` | `/api/admin/car/{id}` | Administrador autenticado, `multipart/form-data` |
 | `DELETE` | `/api/admin/car/{id}` | Administrador autenticado |
 | `POST` | `/api/admin/car/search` | Administrador autenticado |
-| `GET` | `/api/admin/car/bookings` | Administrador autenticado |
-| `GET` | `/api/admin/car/booking/{bookingId}/{status}` | Administrador autenticado |
-| `POST` | `/api/customer/car/book` | Cliente autenticado |
-| `GET` | `/api/customer/car/bookings/{userId}` | Cliente autenticado |
 
 Para cadastrar ou atualizar fotos, envie os arquivos como campos repetidos `images`. O campo `ownerName` é enviado junto aos dados do veículo e só é devolvido pelas rotas administrativas.
 

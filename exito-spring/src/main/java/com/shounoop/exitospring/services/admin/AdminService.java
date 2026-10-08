@@ -1,6 +1,5 @@
 package com.shounoop.exitospring.services.admin;
 
-import com.shounoop.exitospring.dto.BookACarDto;
 import com.shounoop.exitospring.dto.CarDto;
 import com.shounoop.exitospring.dto.CarDtoListDto;
 import com.shounoop.exitospring.dto.SearchCarDto;
@@ -18,11 +17,6 @@ public interface AdminService {
     CarDto getCarById(Long id);
 
     boolean updateCar(Long id, CarDto carDto) throws IOException;
-
-    List<BookACarDto> getBookings();
-
-
-    boolean changeBookingStatus(Long id, String status);
 
     CarDtoListDto searchCar(SearchCarDto searchCarDto);
 }

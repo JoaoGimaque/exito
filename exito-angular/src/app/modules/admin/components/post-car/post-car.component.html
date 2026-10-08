@@ -17,9 +17,7 @@
         <div>
           <nz-form-item>
             <nz-form-control nzHasFeedback [nzXs]="24" nzErrorTip="This Input Is Required">
-              <nz-select formControlName="brand" nzShowSearch nzAllowClear nzPlaceHolder="Marca">
-                <nz-option *ngFor="let brand of listOfBrands" nzLabel="{{brand}}" nzValue="{{brand}}"></nz-option>
-              </nz-select>
+              <input nz-input placeholder="Marca do veículo" formControlName="brand" />
             </nz-form-control>
           </nz-form-item>
         </div>

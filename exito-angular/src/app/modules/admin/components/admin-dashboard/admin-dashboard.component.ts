@@ -9,9 +9,6 @@ import { NzMessageService } from 'ng-zorro-antd/message'
 })
 export class AdminDashboardComponent {
   cars: any[] = [];
-  featuredCars: any[] = [];
-  bookings: any[] = [];
-  isSpinning = false;
 
   constructor(
     private adminService: AdminService,
@@ -20,39 +17,10 @@ export class AdminDashboardComponent {
 
   ngOnInit(): void {
     this.getAllCars();
-    this.getBookings();
   }
 
   getActiveCarsCount(): number {
     return this.cars.filter(car => car.status === 'active' || !car.status).length;
-  }
-
-  getPendingBookingsCount(): number {
-    return this.bookings.filter(booking => booking.bookCarStatus === 'PENDING').length;
-  }
-
-  private getBookings(): void {
-    this.isSpinning = true;
-    this.adminService.getCarBookings().subscribe({
-      next: bookings => {
-        this.bookings = bookings;
-        this.isSpinning = false;
-      },
-      error: () => {
-        this.isSpinning = false;
-        this.message.error('Erro ao carregar as reservas');
-      }
-    });
-  }
-
-  changeBookingStatus(bookingId: number, status: string): void {
-    this.adminService.changeBookingStatus(bookingId, status).subscribe({
-      next: () => {
-        this.message.success('Status da reserva atualizado');
-        this.getBookings();
-      },
-      error: () => this.message.error('Erro ao atualizar a reserva')
-    });
   }
 
   getAllCars(): void {
@@ -65,30 +33,11 @@ export class AdminDashboardComponent {
             : '',
         }));
 
-        this.prepareCars();
       },
       error: () => {
         this.message.error('Erro ao carregar os veículos');
       }
     });
-  }
-
-  private prepareCars(): void {
-    // Somente veículos ativos
-    const activeCars = this.cars.filter(
-      car => car.status === 'active' || !car.status
-    );
-
-    // Veículos em destaque
-    const highlightedCars = activeCars.filter(
-      car => car.destaque === true
-    );
-
-    // Se tiver destaque, usa eles.
-    // Caso contrário, usa os veículos ativos.
-    this.featuredCars = highlightedCars.length
-      ? highlightedCars.slice(0, 8)
-      : activeCars.slice(0, 8);
   }
 
   formatPrice(price: number): string {
@@ -98,23 +47,10 @@ export class AdminDashboardComponent {
     });
   }
 
-  formatKm(km: number): string {
-    return `${Number(km || 0).toLocaleString('pt-BR')} km`;
-  }
-
-  getTransmission(car: any): string {
-    return (car.transmission || car.cambio || '')
-      .toUpperCase() === 'AUTOMÁTICO'
-      ? 'Auto'
-      : 'Manual';
-  }
-
   deleteCar(id: number): void {
     this.adminService.deleteCar(id).subscribe({
       next: () => {
         this.cars = this.cars.filter(car => car.id !== id);
-        this.featuredCars = this.featuredCars.filter(car => car.id !== id);
-
         this.message.success(
           'Car deleted successfully',
           { nzDuration: 3000 }

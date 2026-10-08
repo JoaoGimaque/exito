@@ -29,7 +29,7 @@
   <nz-spin [nzSpinning]="isSpinning">
     <div class="vehicle-grid" *ngIf="filteredCars.length; else emptyCatalog">
       <article class="vehicle-card" *ngFor="let car of filteredCars">
-        <a class="vehicle-image-wrap" [routerLink]="['/customer/book', car.id]" [attr.aria-label]="'Ver detalhes do ' + car.brand + ' ' + car.name">
+        <a class="vehicle-image-wrap" [routerLink]="['/customer/car', car.id]" [attr.aria-label]="'Ver detalhes do ' + car.brand + ' ' + car.name">
           <img class="vehicle-image" [src]="car.processedImage" [alt]="car.brand + ' ' + car.name" loading="lazy">
           <span *ngIf="car.galleryImages.length > 1" class="photo-count">{{ car.galleryImages.length }} fotos</span>
         </a>
@@ -48,7 +48,7 @@
 
         <div class="vehicle-footer">
           <strong>R$ {{ formatPrice(car.price) }}</strong>
-          <a class="details-link" [routerLink]="['/customer/book', car.id]">Ver detalhes</a>
+          <a class="details-link" [routerLink]="['/customer/car', car.id]">Ver detalhes</a>
         </div>
       </div>
     </article>

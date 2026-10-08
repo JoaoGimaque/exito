@@ -3,7 +3,7 @@
     <div>
       <span class="eyebrow">CENTRAL DE OPERAÇÕES</span>
       <h1>Painel administrativo</h1>
-      <p>Acompanhe o estoque e responda às reservas em um só lugar.</p>
+      <p>Gerencie os veículos anunciados pela Êxito Multimarcas.</p>
     </div>
     <a class="primary-action" routerLink="/admin/car">Cadastrar veículo</a>
   </header>
@@ -18,11 +18,6 @@
       <span class="summary-label">Veículos ativos</span>
       <strong>{{ getActiveCarsCount() }}</strong>
       <span class="summary-note">Disponíveis no catálogo</span>
-    </article>
-    <article class="summary-card">
-      <span class="summary-label">Reservas pendentes</span>
-      <strong>{{ getPendingBookingsCount() }}</strong>
-      <span class="summary-note">Aguardando aprovação</span>
     </article>
   </section>
 
@@ -75,34 +70,4 @@
     </div>
   </section>
 
-  <section class="dashboard-section bookings-section">
-    <div class="section-heading">
-      <div>
-        <span class="eyebrow">ATENDIMENTO</span>
-        <h2>Reservas recentes</h2>
-      </div>
-      <span class="section-count">{{ bookings.length }} reservas</span>
-    </div>
-
-    <nz-spin [nzSpinning]="isSpinning">
-      <div *ngIf="bookings.length; else noBookings" class="booking-list">
-        <article *ngFor="let booking of bookings" class="booking-row">
-          <div>
-            <strong>Reserva #{{ booking.id }}</strong>
-            <span>Solicitação de locação</span>
-          </div>
-          <div class="booking-actions">
-            <span class="status-pill" [class.status-pill--pending]="booking.bookCarStatus === 'PENDING'">{{ booking.bookCarStatus }}</span>
-            <ng-container *ngIf="booking.bookCarStatus === 'PENDING'">
-              <button nz-button nzType="primary" nzSize="small" (click)="changeBookingStatus(booking.id, 'Approve')">Aprovar</button>
-              <button nz-button nzType="default" nzDanger nzSize="small" (click)="changeBookingStatus(booking.id, 'Reject')">Rejeitar</button>
-            </ng-container>
-          </div>
-        </article>
-      </div>
-    </nz-spin>
-    <ng-template #noBookings>
-      <div class="empty-state">Nenhuma reserva encontrada.</div>
-    </ng-template>
-  </section>
 </main>

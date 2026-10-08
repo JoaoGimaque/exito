@@ -1,13 +1,9 @@
 package com.shounoop.exitospring.services.admin;
 
-import com.shounoop.exitospring.dto.BookACarDto;
 import com.shounoop.exitospring.dto.CarDto;
 import com.shounoop.exitospring.dto.CarDtoListDto;
 import com.shounoop.exitospring.dto.SearchCarDto;
-import com.shounoop.exitospring.entity.BookACar;
 import com.shounoop.exitospring.entity.Car;
-import com.shounoop.exitospring.enums.BookCarStatus;
-import com.shounoop.exitospring.repository.BookACarRepository;
 import com.shounoop.exitospring.repository.CarRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Example;
@@ -17,7 +13,6 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -25,7 +20,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class AdminServiceImpl implements AdminService {
     private final CarRepository carRepository;
-    private final BookACarRepository bookACarRepository;
 
     @Override
     public boolean postCar(CarDto carDto) throws IOException {
@@ -122,32 +116,6 @@ public class AdminServiceImpl implements AdminService {
             images.add(carDto.getImage().getBytes());
         }
         return images;
-    }
-
-    @Override
-    public List<BookACarDto> getBookings() {
-        return bookACarRepository.findAll().stream().map(BookACar::getBookACarDto).collect(Collectors.toList());
-    }
-
-    @Override
-    public boolean changeBookingStatus(Long id, String status) {
-        Optional<BookACar> optionalBookACar = bookACarRepository.findById(id);
-
-        if (optionalBookACar.isPresent()) {
-            BookACar bookACar = optionalBookACar.get();
-
-            if (Objects.equals(status, "Approve")) {
-                bookACar.setBookCarStatus(BookCarStatus.APPROVED);
-            } else {
-                bookACar.setBookCarStatus(BookCarStatus.REJECTED);
-            }
-
-            bookACarRepository.save(bookACar);
-
-            return true;
-        }
-
-        return false;
     }
 
     @Override

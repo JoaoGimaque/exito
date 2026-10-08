@@ -1,6 +1,5 @@
 package com.shounoop.exitospring.controller;
 
-import com.shounoop.exitospring.dto.BookACarDto;
 import com.shounoop.exitospring.dto.CarDto;
 import com.shounoop.exitospring.services.customer.CustomerService;
 import lombok.RequiredArgsConstructor;
@@ -21,16 +20,6 @@ public class CustomerController {
         return ResponseEntity.ok(customerService.getAllCars());
     }
 
-    @PostMapping("/car/book")
-    public ResponseEntity<Void> bookACar(@RequestBody BookACarDto bookACarDto) {
-        boolean isSuccessful = customerService.bookACar(bookACarDto);
-
-        if (isSuccessful) {
-            return ResponseEntity.status(HttpStatus.CREATED).build();
-        }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-    }
-
     @GetMapping("/car/{carId}")
     public ResponseEntity<CarDto> getCarById(@PathVariable Long carId) {
         CarDto carDto = customerService.getCarById(carId);
@@ -41,8 +30,4 @@ public class CustomerController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
-    @GetMapping("/car/bookings/{userId}")
-    public ResponseEntity<List<BookACarDto>> getBookingsByUserId(@PathVariable Long userId) {
-        return ResponseEntity.ok(customerService.getBookingsByUserId(userId));
-    }
 }

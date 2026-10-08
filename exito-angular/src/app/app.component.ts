@@ -10,7 +10,6 @@ import { Router } from '@angular/router'
 export class AppComponent {
   title = 'exito-angular'
 
-  isCustomerLoggedIn: boolean = StorageService.isCustomerLoggedIn()
   isAdminLoggedIn: boolean = StorageService.isAdminLoggedIn()
 
   constructor(private router: Router) {}
@@ -18,7 +17,6 @@ export class AppComponent {
   ngOnInit() {
     this.router.events.subscribe(event => {
       if (event.constructor.name === 'NavigationEnd') {
-        this.isCustomerLoggedIn = StorageService.isCustomerLoggedIn()
         this.isAdminLoggedIn = StorageService.isAdminLoggedIn()
       }
     })

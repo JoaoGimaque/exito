@@ -1,4 +1,4 @@
-<div *ngIf="!isAdminLoggedIn && !isCustomerLoggedIn">
+<div *ngIf="!isAdminLoggedIn">
   <div class="custom-navbar">
     <div class="navbar-title">
       <a routerLink="/">ÊXITO <span>MULTIMARCAS</span></a>
@@ -25,24 +25,7 @@
     <div class="nav-links">
       <a routerLink="/admin/dashboard" routerLinkActive="active"> Painel </a>
       <a routerLink="/admin/car" routerLinkActive="active"> Cadastrar Carro </a>
-      <a routerLink="/admin/bookings" routerLinkActive="active"> Vendidos </a>
       <a routerLink="/admin/search" routerLinkActive="active"> Buscar </a>
-
-      <a routerLink="#" routerLinkActive="active" (click)="logout()"> Sair </a>
-    </div>
-  </div>
-</div>
-
-<div *ngIf="isCustomerLoggedIn">
-  <div class="custom-navbar">
-    <div class="navbar-title">
-      <a routerLink="/customer/dashboard">ÊXITO <span>CLIENTE</span></a>
-    </div>
-
-    <div class="nav-links">
-      <a routerLink="/customer/dashboard" routerLinkActive="active"> Painel </a>
-
-      <a routerLink="/customer/dashboard" routerLinkActive="active">Estoque</a>
 
       <a routerLink="#" routerLinkActive="active" (click)="logout()"> Sair </a>
     </div>

@@ -15,7 +15,6 @@ export class PostCarComponent {
   selectedFiles: File[] = []
   imagePreviews: string[] = []
   listOfOption: Array<{ label: string; value: string }> = []
-  listOfBrands = ['Toyota', 'Honda', 'BMW', 'Mercedes', 'Audi', 'Lexus']
   listOfType = ['Sports Car', 'Diesel', 'Crossover', 'Luxury Car']
   listOfColor = ['Red', 'Blue', 'Brown', 'Green']
   listOfTransmission = ['Manual', 'Automatic']
